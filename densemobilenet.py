@@ -1,5 +1,5 @@
 from keras.models import Model
-from keras.layers import Input, merge, ZeroPadding2D, Conv2D
+from keras.layers import Input, concatenate, ZeroPadding2D, Conv2D
 from keras.layers import add, Reshape
 from keras.layers import ReLU
 from keras.layers import DepthwiseConv2D
@@ -280,7 +280,7 @@ def dense_block(x, stage, nb_layers, nb_filter, growth_rate, dropout_rate=None, 
     for i in range(nb_layers):
         branch = i+1
         x = conv_block(concat_feat, 6, stage, branch, growth_rate, dropout_rate, weight_decay)
-        concat_feat = merge([concat_feat, x], mode='concat', concat_axis=concat_axis, name='concat_'+str(stage)+'_'+str(branch))
+        concat_feat = concatenate([concat_feat, x], mode='concat', concat_axis=concat_axis, name='concat_'+str(stage)+'_'+str(branch))
 
         if grow_nb_filters:
             nb_filter += growth_rate
