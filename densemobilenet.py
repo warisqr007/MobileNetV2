@@ -289,4 +289,4 @@ def dense_block(x, stage, nb_layers, nb_filter, growth_rate, dropout_rate=None, 
 
 
 if __name__ == '__main__':
-    DenseNet(reduction=0.5, classes=100)
+    DenseNet(reduction=0.5, classes=10)
