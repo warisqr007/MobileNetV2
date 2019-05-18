@@ -138,10 +138,10 @@ def train(batch, epochs, num_classes, size, weights, tclasses):
     train_generator, validation_generator, count1, count2 = generate(batch, size)
 
     if weights:
-        model = DenseNet(reduction=0.5, classes=1000)
+        model = DenseNet(reduction=0.5, classes=100)
         model = fine_tune(num_classes, weights, model)
     else:
-        model = DenseNet(reduction=0.5, classes=1000)
+        model = DenseNet(reduction=0.5, classes=100)
 
     opt = Adam()
     earlystop = EarlyStopping(monitor='val_acc', patience=30, verbose=0, mode='auto')
