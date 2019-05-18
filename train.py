@@ -7,6 +7,7 @@ import argparse
 import pandas as pd
 
 from mobilenet_v2 import MobileNetv2
+from densemobilenet import DenseNet
 
 from keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
@@ -137,10 +138,10 @@ def train(batch, epochs, num_classes, size, weights, tclasses):
     train_generator, validation_generator, count1, count2 = generate(batch, size)
 
     if weights:
-        model = MobileNetv2((size, size, 3), tclasses)
+        model = DenseNet(reduction=0.5, classes=1000)
         model = fine_tune(num_classes, weights, model)
     else:
-        model = MobileNetv2((size, size, 3), num_classes)
+        model = DenseNet(reduction=0.5, classes=1000)
 
     opt = Adam()
     earlystop = EarlyStopping(monitor='val_acc', patience=30, verbose=0, mode='auto')
