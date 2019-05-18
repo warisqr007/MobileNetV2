@@ -6,7 +6,7 @@ import sys
 import argparse
 import pandas as pd
 
-from mobilenet_v2 import MobileNetv2
+#from mobilenet_v2 import MobileNetv2
 from densemobilenet import DenseNet
 
 from keras.optimizers import Adam
