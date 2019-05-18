@@ -286,3 +286,7 @@ def dense_block(x, stage, nb_layers, nb_filter, growth_rate, dropout_rate=None, 
             nb_filter += growth_rate
 
     return concat_feat, nb_filter
+
+
+if __name__ == '__main__':
+    DenseNet(reduction=0.5, classes=1000)
