@@ -1,7 +1,9 @@
 from keras.models import Model
 from keras.layers import Input, merge, ZeroPadding2D, Conv2D
 from keras.layers import add, Reshape
-from keras.applications.mobilenet import relu6, DepthwiseConv2D
+from keras.layers import ReLU
+from keras.layers import DepthwiseConv2D
+#from keras.applications.mobilenet import relu6, DepthwiseConv2D
 from keras.utils.vis_utils import plot_model
 from keras.layers.core import Dense, Dropout, Activation
 from keras.layers.convolutional import Convolution2D
@@ -115,7 +117,7 @@ def conv_block(x, t, stage, branch, nb_filter, dropout_rate=None, weight_decay=1
     x = Convolution2D(tchannel, 1, 1, name=conv_name_base+'_x1', bias=False)(x)
     x = BatchNormalization(epsilon=eps, axis=concat_axis, name=conv_name_base+'_x1_bn')(x)
     x = Scale(axis=concat_axis, name=conv_name_base+'_x1_scale')(x)
-    x = Activation('relu6', name=relu_name_base+'_x1')(x)
+    x = ReLU(6.,  name=relu_name_base+'_x1')(x)
     
     if dropout_rate:
         x = Dropout(dropout_rate)(x)
@@ -126,7 +128,7 @@ def conv_block(x, t, stage, branch, nb_filter, dropout_rate=None, weight_decay=1
     x = Convolution2D(nb_filter, 3, 3, name=conv_name_base+'_x2', bias=False)(x)
     x = BatchNormalization(epsilon=eps, axis=concat_axis, name=conv_name_base+'_x2_bn')(x)
     x = Scale(axis=concat_axis, name=conv_name_base+'_x2_scale')(x)
-    x = Activation('relu6', name=relu_name_base+'_x2')(x)
+    x = ReLU(6.,  name=relu_name_base+'_x2')(x)
 
     if dropout_rate:
         x = Dropout(dropout_rate)(x)
